@@ -66,11 +66,10 @@ def get_own_post():
 
     if own_media['meta']['code']==200:
         if len(own_media['data']):
-            if len(own_media['data']):
-                image_name = own_media['data'][0]['id'] + '.jpeg'
-                image_url = own_media['data'][0]['images']['standard_resolution']['url']
-                urllib.urlretrieve(image_url, image_name)
-                print 'Your image has been downloaded!'
+          image_name = own_media['data'][0]['id'] + '.jpeg'
+          image_url = own_media['data'][0]['images']['standard_resolution']['url']
+          urllib.urlretrieve(image_url, image_name)
+          print 'Your image has been downloaded!'
         else:
             print "post doesnot exist"
     else:
@@ -99,8 +98,8 @@ def get_user_post(insta_username):
       print 'Status code other than 200 received!'
 
 self_info()
-get_user_id('bhavikaa_singla')
-get_user_info('bhavikaa_singla')
-print get_own_post()
-get_user_post('bhavikaa_singla')
+get_user_id('samrao_aman')
+get_user_info('samrao_aman')
+get_own_post()
+get_user_post('samrao_aman')
 

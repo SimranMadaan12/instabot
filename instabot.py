@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt  # Matplotlib is  a Python 2D plotting library which produces figures
 import requests,urllib   #urllib is a package that collects information all over the world .Requests library to send http request
 import pylab
+import re # Library for regular expression
 from wordcloud import WordCloud  # An image composed of words used in a particular text or subject, in which the size of each word indicates its frequency or importance.
 APP_ACCESS_TOKEN='5652039245.018aba3.9a7b64bde08f455fafc078efca07fb6a' #Access token for authenticated user(Here its mine)
 
-#sandbox user:"brar_japji","bhavikaa_singla"
+#Users: "brar_japji","simoni3604","bhavikaa_singla"
 BASE_URL='https://api.instagram.com/v1/' # url same in all is a base url
 
 # Function definition to show Access token's owner's details
@@ -145,6 +146,10 @@ def post_a_comment(insta_username):
         print "Sorry !! you cannot enter a comment with all capital alphabets ."
     elif len(text_words) >=300:
         print "You cross your text limit!!!!"
+    elif len(re.findall(r'#[^#]+\b',comment_text,re.UNICODE|re.MULTILINE))>4:
+        print "THE COMMENT CANNOT CONTAIN MORE THAN 4 HASHTAGS"
+    elif len(re.findall(r'\bhttps?://\S+\.\S+', comment_text)) > 1:
+        print "THE COMMENT CANNOT CONTAIN MORE THAN ONE URL"
     else:
         payload = {"access_token": APP_ACCESS_TOKEN, "text": comment_text}
         request_url = (BASE_URL + 'media/%s/comments') % (media_id)
@@ -233,9 +238,37 @@ def recent_media_like():
             urllib.urlretrieve(image_url, image_name)
             print 'Your image has been downloaded!'
         else:
-            print "post doesnot exist"
+            print "No post liked"
     else:
         print "status code other than 200 received"
+# Function definition to get media of user's choice by  taking input from user as index
+def get_media_of_your_choice(insta_username):
+     user_id = get_user_id(insta_username)
+     if user_id == None:
+         print 'user does not exist'
+     request_url = (BASE_URL + 'users/%s/media/recent/?access_token=%s') % (user_id, APP_ACCESS_TOKEN)
+     user_media = requests.get(request_url).json()
+     if user_media['meta']['code'] == 200:
+         if len(user_media['data']):
+             post_number = raw_input("enter no of post which you want : ")
+             post_number = int(post_number)
+             x = post_number - 1 # Zero based indexing...
+
+             if x<len(user_media['data']):
+
+
+                 image_name = user_media['data'][x]['id'] + '.jpeg'
+                 image_url = user_media['data'][x]['images']['standard_resolution']['url']
+                 urllib.urlretrieve(image_url, image_name)
+                 print 'Your image has been downloaded!'
+             else:
+                 print "No media found!!"
+         else:
+             print'media does not exist'
+     else:
+         print 'status code error'
+
+
 #Function definition to start the Instabot
 def start_bot():
     print 'Hey! Welcome to instaBot!'
@@ -251,7 +284,8 @@ def start_bot():
         print "h.Wordcloud of user interest\n"
         print "i.Get list of user who liked the recent media\n"
         print "j.Get the recent post liked by the user\n"
-        print "k.Exit"
+        print "k.Get the media of your choice\n"
+        print "l.Exit"
 
         choice = raw_input("Enter you choice: ")
         # Calling of different functions based on user choice
@@ -259,38 +293,67 @@ def start_bot():
             self_info()
         elif choice == "b":
             insta_username = raw_input("Enter the username of the user: ")
-            get_user_info(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+
+             get_user_info(insta_username)
+            else:
+                print "Please enter a valid username"
         elif choice == "c":
             get_own_post()
         elif choice == "d":
             insta_username = raw_input("Enter the username of the user: ")
-            get_user_post(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             get_user_post(insta_username)
+            else:
+             print "Please enter a valid username"
         elif choice == "e":
             insta_username = raw_input("Enter the username of the user: ")
-            like_a_post(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             like_a_post(insta_username)
+            else:
+                print "Please enter a valid username"
         elif choice == "f":
             insta_username = raw_input("Enter the username of the user: ")
-            list_of_comments(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             list_of_comments(insta_username)
+            else:
+                print "Please enter a valid username"
         elif choice == "g":
             insta_username = raw_input("Enter the username of the user: ")
-            post_a_comment(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             post_a_comment(insta_username)
+            else:
+                print "Please enter a valid username"
         elif choice == "h":
             insta_username = raw_input("Enter the username of the user: ")
-            list_of_tags(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             list_of_tags(insta_username)
+            else:
+             print "Please enter a valid username"
         elif choice == "i":
             insta_username = raw_input("Enter the username of the user: ")
-            list_of_likes(insta_username)
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             list_of_likes(insta_username)
+            else:
+                print "Please enter a valid username"
 
         elif choice == "j":
             recent_media_like()
         elif choice == "k":
+            insta_username = raw_input("Enter the username of the user: ")
+            if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
+             get_media_of_your_choice(insta_username)
+            else:
+                print "Please enter a valid username"
+
+        elif choice == "l":
             exit()
         else:
             print "Wrong choice"
 
 
 
-# Caling of the function start_bot() to start the instabot
+# Calling of the function start_bot() to start the instabot
 start_bot()
 
 

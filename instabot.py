@@ -294,57 +294,80 @@ def start_bot():
         elif choice == "b":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-
-             get_user_info(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                    get_user_info(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-                print "Please enter a valid username"
+                  print "Please enter a valid username"
         elif choice == "c":
             get_own_post()
         elif choice == "d":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             get_user_post(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                   get_user_post(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-             print "Please enter a valid username"
+                  print "Please enter a valid username"
         elif choice == "e":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             like_a_post(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                  like_a_post(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-                print "Please enter a valid username"
+                  print "Please enter a valid username"
         elif choice == "f":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             list_of_comments(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                  list_of_comments(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-                print "Please enter a valid username"
+                  print "Please enter a valid username"
         elif choice == "g":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             post_a_comment(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                   post_a_comment(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-                print "Please enter a valid username"
+                 print "Please enter a valid username"
         elif choice == "h":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             list_of_tags(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                  list_of_tags(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-             print "Please enter a valid username"
+                   print "Please enter a valid username"
         elif choice == "i":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             list_of_likes(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                   list_of_likes(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-                print "Please enter a valid username"
+                  print "Please enter a valid username"
 
         elif choice == "j":
             recent_media_like()
         elif choice == "k":
             insta_username = raw_input("Enter the username of the user: ")
             if len(insta_username)>0 and insta_username.isspace()== False and insta_username.isdigit()== False:
-             get_media_of_your_choice(insta_username)
+                if not set('[~!@#$%^&*()+{}":;\']" "').intersection(insta_username):
+                  get_media_of_your_choice(insta_username)
+                else:
+                    print "Please enter a valid insta username!\nUsername can only use letters,numbers,underscores and periods!"
             else:
-                print "Please enter a valid username"
+                  print "Please enter a valid username"
 
         elif choice == "l":
             exit()
